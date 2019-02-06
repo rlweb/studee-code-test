@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Post as PostRequest;
 use App\Post;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\View\View;
 
 /**
  * Class AdminController
@@ -16,37 +18,75 @@ class AdminController extends BaseController
     /**
      * Admin Index
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         return view('admin.index', ['posts' => Post::paginate(5)]);
     }
 
     /**
+     * Admin Create Form
+     */
+    public function createForm(): View
+    {
+        $post = new Post();
+        return view('admin.form', ['post' => $post]);
+    }
+
+    /**
      * Admin Create
      *
-     * @param Request $request
+     * @param PostRequest $post
+     * @return RedirectResponse
+     * @throws \Exception
      */
-    public function create(Request $request)
+    public function create(PostRequest $post): RedirectResponse
     {
-        throw new \Exception('todo');
+        $post = new Post([
+            'title'  => $post['title'],
+            'author' => $post['author'],
+            'body'   => $post['body'],
+        ]);
+        $post->save();
+
+        return redirect('/admin')->with('success', 'New Post saved!');
+    }
+
+    /**
+     * Admin Edit Form
+     *
+     * @param Post $post
+     * @return View
+     */
+    public function editForm(Post $post): View
+    {
+        return view('admin.form', ['post' => $post]);
     }
 
     /**
      * Admin Edit
      *
-     * @param Post $post
+     * @param Post        $post
+     * @param PostRequest $postRequest
+     * @return RedirectResponse
      */
-    public function edit(Post $post)
+    public function edit(Post $post, PostRequest $postRequest)
     {
-        throw new \Exception('todo');
+        $post->title = $postRequest['title'];
+        $post->author = $postRequest['author'];
+        $post->body = $postRequest['body'];
+        $post->save();
+
+        return redirect('/admin')->with('success', 'Edited Post saved!');
     }
 
     /**
      * Admin Delete
      *
      * @param Post $post
+     * @return RedirectResponse
+     * @throws \Exception
      */
     public function delete(Post $post)
     {

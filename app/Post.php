@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Post
+ *
+ * @property string title
+ * @property string author
+ * @property string body
  */
 class Post extends Model
 {
@@ -15,6 +19,8 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'author', 'body',
+        'title',
+        'author',
+        'body',
     ];
 }

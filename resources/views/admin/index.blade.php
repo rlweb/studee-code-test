@@ -4,6 +4,8 @@
 
 @section('content')
 
+    <a href="/admin/new" class="btn btn-primary">Create Post</a>
+
     <table class="table">
         <thead>
         <tr>
@@ -23,11 +25,14 @@
                 <td>{{ $post->author }}</td>
                 <td>{{ $post->created_at }}</td>
                 <td>
-                    <form action="/admin/{{ $post->id }}" method="post">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                        <button class="btn btn-danger">Delete</button>
-                    </form>
+                    <div class="btn-group">
+                        <a class="btn btn-info" href="/admin/{{ $post->id }}">Edit</a>
+                        <form action="/admin/{{ $post->id }}" method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         @endforeach
