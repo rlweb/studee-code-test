@@ -4,14 +4,29 @@
 
 @section('content')
 
-    @foreach ($posts as $post)
-        <h1>{{ $post->title }}
-            <small class="text-muted">By {{ $post->author }} on {{ $post->created_at }}</small>
-        </h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Created</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach ($posts as $post)
 
-        {{ $post->body }}
-
-    @endforeach
+            <tr>
+                <td>{{ $post->id }}</td>
+                <td>{{ $post->title }}</td>
+                <td>{{ $post->author }}</td>
+                <td>{{ $post->created_at }}</td>
+                <td><!-- todo --></td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
 
     <!-- pagination -->
     {{ $posts->links() }}
