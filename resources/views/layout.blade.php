@@ -39,6 +39,9 @@
 
 <div class="container-fluid">
 
+    <!-- cannot be view cached since the below is session based -->
+    @include('includes.message')
+
     @yield('content')
 
 </div>

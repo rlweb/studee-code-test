@@ -22,7 +22,13 @@
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->author }}</td>
                 <td>{{ $post->created_at }}</td>
-                <td><!-- todo --></td>
+                <td>
+                    <form action="/admin/{{ $post->id }}" method="post">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
             </tr>
         @endforeach
         </tbody>

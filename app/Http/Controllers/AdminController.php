@@ -50,6 +50,7 @@ class AdminController extends BaseController
      */
     public function delete(Post $post)
     {
-        throw new \Exception('todo');
+        $post->delete();
+        return back()->with('success', 'Post deleted!');
     }
 }
