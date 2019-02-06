@@ -12,3 +12,8 @@
 */
 
 Route::get('/', 'Controller@index');
+
+Route::get('/admin', 'AdminController@index');
+Route::post('/admin', 'AdminController@create');
+Route::put('/admin/post', 'AdminController@edit');
+Route::delete('/admin/post', 'AdminController@delete');
