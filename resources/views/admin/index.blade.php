@@ -23,7 +23,7 @@
                 <td>{{ $post->id }}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->author }}</td>
-                <td>{{ $post->created_at }}</td>
+                <td><span title="{{ $post->created_at }}">{{ $post->created_at->diffForHumans() }}</span></td>
                 <td>
                     <div class="btn-group">
                         <a class="btn btn-info" href="/admin/{{ $post->id }}">Edit</a>
